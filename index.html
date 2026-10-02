@@ -1,165 +1,431 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#f2f2f7">
-<title>i玩机乐园 · iOS 软件与玩机教程</title>
-<style>
-  /* ===== 基础重置（兼容 iOS9 Safari） ===== */
-  * { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
-  html, body { height: 100%; }
-  body {
-    font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
-    color: #1c1c1e;
-    background: #f2f2f7;
-    line-height: 1.5;
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    touch-action: manipulation;
-    padding-bottom: 72px;
-  }
-  a { color: inherit; text-decoration: none; }
-  svg { display: block; }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f2f2f7">
+  <title>i玩机乐园 · iOS 软件与玩机教程</title>
+  <style>
+    /* ===== 基础重置（兼容 iOS9 Safari） ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
 
-  /* ===== 顶部固定区（导航 + 搜索） ===== */
-  .top {
-    position: -webkit-sticky; position: sticky; top: 0; z-index: 20;
-    background: rgba(242,242,247,.82);
-    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-    border-bottom: .5px solid rgba(60,60,67,.18);
-  }
-  .nav {
-    padding: 10px 16px 8px;
-  }
-  .nav-row { display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center; }
-  .nav .title { font-size: 17px; font-weight: 700; letter-spacing: .2px; white-space: nowrap; -webkit-box-flex: 0; flex: 0 0 auto; }
-  .nav .title svg { width: 18px; height: 18px; vertical-align: -3px; margin-right: 5px; fill: #1c1c1e; }
-  .nav .spacer { -webkit-box-flex: 1; flex: 1; }
-  .nav .share {
-    display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center;
-    color: #007aff; font-size: 15px; font-weight: 600;
-  }
-  .nav .share svg { width: 18px; height: 18px; margin-right: 3px; stroke: #007aff; }
+    html,
+    body {
+      height: 100%;
+    }
 
-  /* ===== 大标题 + 搜索 ===== */
-  .hero { padding: 14px 16px 6px; }
-  .hero h1 { font-size: 30px; font-weight: 800; letter-spacing: -.4px; color: #1c1c1e; }
-  .hero p { font-size: 13px; color: #8e8e93; margin-top: 2px; }
-  .search {
-    -webkit-box-flex: 1; flex: 1; min-width: 0;
-    margin: 0 0 0 12px; background: #e3e3e8; border-radius: 9px;
-    display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center;
-    padding: 6px 10px; height: 32px;
-  }
-  .search svg { width: 16px; height: 16px; stroke: #8e8e93; margin-right: 7px; -webkit-box-flex: 0; flex: 0 0 auto; }
-  .search input {
-    -webkit-appearance: none; appearance: none; border: 0; background: transparent;
-    font-size: 15px; color: #1c1c1e; width: 100%; min-width: 0; outline: none;
-  }
-  .search input::-webkit-input-placeholder { color: #8e8e93; }
+    body {
+      font-family: -apple-system, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #1c1c1e;
+      background: #f2f2f7;
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+      touch-action: manipulation;
+      padding-bottom: 72px;
+    }
 
-  /* ===== 底部标签栏（Tab Bar） ===== */
-  .tabbar {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
-    background: rgba(248,248,250,.92);
-    -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px);
-    border-top: .5px solid rgba(60,60,67,.2);
-    display: -webkit-box; display: flex;
-    padding: 8px 0 12px;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom));
-  }
-  .tab {
-    -webkit-box-flex: 1;
-    flex: 1;
-    text-align: center;
-    color: #8e8e93;
-    font-size: 11px;
-    font-weight: 500;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    display: flex;
-    flex-direction: column;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    min-height: 48px;
-    padding: 4px 0;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .tab svg { width: 26px; height: 26px; stroke: #8e8e93; margin-bottom: 3px; pointer-events: none; }
-  .tab span { pointer-events: none; }
-  .tab.on { color: #007aff; }
-  .tab.on svg { stroke: #007aff; }
-  .tab:active { opacity: .55; background: rgba(60,60,67,.06); border-radius: 10px; }
-  .g-blue   { background: -webkit-linear-gradient(135deg,#0a84ff,#5ac8fa); background: linear-gradient(135deg,#0a84ff,#5ac8fa); }
-  .g-orange { background: -webkit-linear-gradient(135deg,#ff9f0a,#ffd60a); background: linear-gradient(135deg,#ff9f0a,#ffd60a); }
-  .g-green  { background: -webkit-linear-gradient(135deg,#34c759,#30d158); background: linear-gradient(135deg,#34c759,#30d158); }
-  .g-purple { background: -webkit-linear-gradient(135deg,#bf5af2,#5e5ce6); background: linear-gradient(135deg,#bf5af2,#5e5ce6); }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-  /* ===== 分组列表 ===== */
-  .section { padding: 16px 16px 4px; }
-  .sec-title {
-    font-size: 13px; font-weight: 700; color: #8e8e93; text-transform: uppercase;
-    letter-spacing: .4px; margin: 0 12px 7px;
-  }
-  .group {
-    background: #fff; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 .5px 0 rgba(0,0,0,.04);
-  }
-  .row {
-    display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center;
-    padding: 11px 14px; position: relative;
-  }
-  .row + .row::before {
-    content: ""; position: absolute; top: 0; left: 60px; right: 0;
-    border-top: .5px solid rgba(60,60,67,.12);
-  }
-  .row .ic {
-    width: 32px; height: 32px; border-radius: 8px; -webkit-box-flex: 0; flex: 0 0 auto;
-    display: -webkit-box; display: flex; -webkit-box-pack: center; justify-content: center;
-    -webkit-box-align: center; align-items: center; margin-right: 12px;
-  }
-  .row .ic svg { width: 18px; height: 18px; stroke: #fff; }
-  .row .body { -webkit-box-flex: 1; flex: 1; min-width: 0; }
-  .row .t { font-size: 16px; color: #1c1c1e; font-weight: 500; }
-  .row .d { font-size: 12px; color: #8e8e93; margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .row .chev { -webkit-box-flex: 0; flex: 0 0 auto; margin-left: 6px; }
-  .row .chev svg { width: 16px; height: 16px; stroke: #c4c4cc; }
+    svg {
+      display: block;
+    }
 
-  /* ===== App Store 风格应用卡 ===== */
-  .appcard {
-    background: #fff; border-radius: 14px; padding: 12px 14px; margin: 0 0 12px;
-    box-shadow: 0 1px 3px rgba(20,30,80,.06), 0 6px 16px rgba(20,30,80,.05);
-  }
-  .appcard + .appcard::before { display: none; }
-  .appcard .ai {
-    width: 60px; height: 60px; border-radius: 14px; -webkit-box-flex: 0; flex: 0 0 auto;
-    display: -webkit-box; display: flex; -webkit-box-pack: center; justify-content: center;
-    -webkit-box-align: center; align-items: center; margin-right: 12px;
-  }
-  .appcard .ai svg { width: 32px; height: 32px; stroke: #fff; }
-  .appcard .t { font-weight: 600; }
-  .appcard .d { font-size: 12px; color: #8e8e93; margin-top: 3px; }
-  .appcard .get {
-    -webkit-box-flex: 0; flex: 0 0 auto; margin-left: 10px;
-    background: #e3e3e8; color: #007aff; font-weight: 700; font-size: 14px;
-    padding: 7px 16px; border-radius: 18px; white-space: nowrap;
-  }
-  .appcard .get:active { background: #d1d1d6; }
+    /* ===== 顶部固定区（导航 + 搜索） ===== */
+    .top {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(242, 242, 247, .82);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-bottom: .5px solid rgba(60, 60, 67, .18);
+    }
 
-  .foot { text-align: center; color: #8e8e93; font-size: 11px; padding: 122px 16px 77px; line-height: 1.9; }
-  .foot a { color: #007aff; }
-  .empty { text-align: center; color: #8e8e93; font-size: 13px; padding: 30px 0; display: none; }
-</style>
+    .nav {
+      padding: 10px 16px 8px;
+    }
+
+    .nav-row {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+    }
+
+    .nav .title {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      white-space: nowrap;
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+    }
+
+    .nav .title svg {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      vertical-align: -3px;
+      margin-right: 5px;
+      fill: #1c1c1e;
+    }
+
+    .nav .spacer {
+      -webkit-box-flex: 1;
+      flex: 1;
+    }
+
+    .nav .share {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      color: #007aff;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .nav .share svg {
+      width: 18px;
+      height: 18px;
+      margin-right: 3px;
+      stroke: #007aff;
+    }
+
+    /* ===== 大标题 + 搜索 ===== */
+    .hero {
+      padding: 14px 16px 6px;
+    }
+
+    .hero h1 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+      color: #1c1c1e;
+    }
+
+    .hero p {
+      font-size: 13px;
+      color: #8e8e93;
+      margin-top: 2px;
+    }
+
+    .search {
+      -webkit-box-flex: 1;
+      flex: 1;
+      min-width: 0;
+      margin: 0 0 0 12px;
+      background: #e3e3e8;
+      border-radius: 9px;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      padding: 6px 10px;
+      height: 32px;
+    }
+
+    .search svg {
+      width: 16px;
+      height: 16px;
+      stroke: #8e8e93;
+      margin-right: 7px;
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+    }
+
+    .search input {
+      -webkit-appearance: none;
+      appearance: none;
+      border: 0;
+      background: transparent;
+      font-size: 15px;
+      color: #1c1c1e;
+      width: 100%;
+      min-width: 0;
+      outline: none;
+    }
+
+    .search input::-webkit-input-placeholder {
+      color: #8e8e93;
+    }
+
+    /* ===== 底部标签栏（Tab Bar） ===== */
+    .tabbar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 30;
+      background: rgba(248, 248, 250, .92);
+      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
+      border-top: .5px solid rgba(60, 60, 67, .2);
+      display: -webkit-box;
+      display: flex;
+      padding: 8px 0 12px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+    }
+
+    .tab {
+      -webkit-box-flex: 1;
+      flex: 1;
+      text-align: center;
+      color: #8e8e93;
+      font-size: 11px;
+      font-weight: 500;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-align: center;
+      align-items: center;
+      -webkit-box-pack: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 4px 0;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab svg {
+      width: 26px;
+      height: 26px;
+      stroke: #8e8e93;
+      margin-bottom: 3px;
+      pointer-events: none;
+    }
+
+    .tab span {
+      pointer-events: none;
+    }
+
+    .tab.on {
+      color: #007aff;
+    }
+
+    .tab.on svg {
+      stroke: #007aff;
+    }
+
+    .tab:active {
+      opacity: .55;
+      background: rgba(60, 60, 67, .06);
+      border-radius: 10px;
+    }
+
+    .g-blue {
+      background: -webkit-linear-gradient(135deg, #0a84ff, #5ac8fa);
+      background: linear-gradient(135deg, #0a84ff, #5ac8fa);
+    }
+
+    .g-orange {
+      background: -webkit-linear-gradient(135deg, #ff9f0a, #ffd60a);
+      background: linear-gradient(135deg, #ff9f0a, #ffd60a);
+    }
+
+    .g-green {
+      background: -webkit-linear-gradient(135deg, #34c759, #30d158);
+      background: linear-gradient(135deg, #34c759, #30d158);
+    }
+
+    .g-purple {
+      background: -webkit-linear-gradient(135deg, #bf5af2, #5e5ce6);
+      background: linear-gradient(135deg, #bf5af2, #5e5ce6);
+    }
+
+    /* ===== 分组列表 ===== */
+    .section {
+      padding: 16px 16px 4px;
+    }
+
+    .sec-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #8e8e93;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      margin: 0 12px 7px;
+    }
+
+    .group {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 .5px 0 rgba(0, 0, 0, .04);
+    }
+
+    .row {
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-align: center;
+      align-items: center;
+      padding: 11px 14px;
+      position: relative;
+    }
+
+    .row+.row::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 60px;
+      right: 0;
+      border-top: .5px solid rgba(60, 60, 67, .12);
+    }
+
+    .row .ic {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-right: 12px;
+    }
+
+    .row .ic svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff;
+    }
+
+    .row .body {
+      -webkit-box-flex: 1;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .row .t {
+      font-size: 16px;
+      color: #1c1c1e;
+      font-weight: 500;
+    }
+
+    .row .d {
+      font-size: 12px;
+      color: #8e8e93;
+      margin-top: 1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .row .chev {
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+      margin-left: 6px;
+    }
+
+    .row .chev svg {
+      width: 16px;
+      height: 16px;
+      stroke: #c4c4cc;
+    }
+
+    /* ===== App Store 风格应用卡 ===== */
+    .appcard {
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin: 0 0 12px;
+      box-shadow: 0 1px 3px rgba(20, 30, 80, .06), 0 6px 16px rgba(20, 30, 80, .05);
+    }
+
+    .appcard+.appcard::before {
+      display: none;
+    }
+
+    .appcard .ai {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+      display: -webkit-box;
+      display: flex;
+      -webkit-box-pack: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      align-items: center;
+      margin-right: 12px;
+    }
+
+    .appcard .ai svg {
+      width: 32px;
+      height: 32px;
+      stroke: #fff;
+    }
+
+    .appcard .t {
+      font-weight: 600;
+    }
+
+    .appcard .d {
+      font-size: 12px;
+      color: #8e8e93;
+      margin-top: 3px;
+    }
+
+    .appcard .get {
+      -webkit-box-flex: 0;
+      flex: 0 0 auto;
+      margin-left: 10px;
+      background: #e3e3e8;
+      color: #007aff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 7px 16px;
+      border-radius: 18px;
+      white-space: nowrap;
+    }
+
+    .appcard .get:active {
+      background: #d1d1d6;
+    }
+
+    .foot {
+      text-align: center;
+      color: #8e8e93;
+      font-size: 11px;
+      padding: 122px 16px 77px;
+      line-height: 1.9;
+    }
+
+    .foot a {
+      color: #007aff;
+    }
+
+    .empty {
+      text-align: center;
+      color: #8e8e93;
+      font-size: 13px;
+      padding: 30px 0;
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- 顶部固定区：导航 + 搜索 -->
@@ -167,12 +433,18 @@
     <div class="nav">
       <div class="nav-row">
         <div class="title">
-          <svg viewBox="0 0 24 24"><path d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.88 2.65 3.22 2.6 1.29-.05 1.78-.83 3.34-.83 1.56 0 2 .83 3.37.81 1.39-.03 2.27-1.27 3.12-2.53.98-1.45 1.39-2.85 1.41-2.92-.03-.01-2.71-1.04-2.74-4.12zM14.63 4.4c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.65.76-1.22 1.98-1.07 3.15 1.14.09 2.3-.58 3-1.44z"/></svg>
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M17.05 12.04c-.03-2.6 2.12-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.88 2.65 3.22 2.6 1.29-.05 1.78-.83 3.34-.83 1.56 0 2 .83 3.37.81 1.39-.03 2.27-1.27 3.12-2.53.98-1.45 1.39-2.85 1.41-2.92-.03-.01-2.71-1.04-2.74-4.12zM14.63 4.4c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.65.76-1.22 1.98-1.07 3.15 1.14.09 2.3-.58 3-1.44z" />
+          </svg>
           i玩机乐园
         </div>
         <div class="search">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-          <input id="q" type="search" placeholder="搜索 公告 软件 游戏 讨论" onkeyup="filterList()">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input id="q" type="search" placeholder="搜索" onkeyup="filterList()">
         </div>
       </div>
     </div>
@@ -191,19 +463,34 @@
   <!-- 底部标签栏（固定） -->
   <div class="tabbar" id="tabbar">
     <div class="tab on" id="tab-ann" onclick="setCategory('ann', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4a1 1 0 0 0 1 1h3l8 5V4L7 9H4a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 10v4a1 1 0 0 0 1 1h3l8 5V4L7 9H4a1 1 0 0 0-1 1z" />
+        <path d="M18 8a4 4 0 0 1 0 8" />
+      </svg>
       公告
     </div>
     <div class="tab" id="tab-app" onclick="setCategory('app', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="7" height="7" rx="1.6" />
+        <rect x="14" y="3" width="7" height="7" rx="1.6" />
+        <rect x="3" y="14" width="7" height="7" rx="1.6" />
+        <rect x="14" y="14" width="7" height="7" rx="1.6" />
+      </svg>
       软件
     </div>
     <div class="tab" id="tab-game" onclick="setCategory('game', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="9" rx="4"/><path d="M7 12v2M6 13h2"/><circle cx="16" cy="12.4" r="1"/><circle cx="18.5" cy="14" r="1"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="8" width="18" height="9" rx="4" />
+        <path d="M7 12v2M6 13h2" />
+        <circle cx="16" cy="12.4" r="1" />
+        <circle cx="18.5" cy="14" r="1" />
+      </svg>
       游戏
     </div>
     <div class="tab" id="tab-disc" onclick="setCategory('disc', this)">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v10H9l-4 4V5z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5h16v10H9l-4 4V5z" />
+      </svg>
       讨论
     </div>
   </div>
@@ -211,126 +498,127 @@
   <!-- 内容数据（编辑这里即可维护网站） -->
   <script src="data.js"></script>
   <script>
-  // 当前分类（进入默认显示公告）
-  var currentCat = 'ann';
+    // 当前分类（进入默认显示公告）
+    var currentCat = 'ann';
 
-  // SVG 图标库：新增内容时按 icon 名称引用
-  var ICONS = {
-    horn:    '<path d="M3 10v4a1 1 0 0 0 1 1h3l8 5V4L7 9H4a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/>',
-    bell:    '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8v.5"/>',
-    gift:    '<path d="M5 21V4h11l-2 4 2 4H5"/>',
-    film:    '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9l5 3-5 3z" fill="#fff" stroke="none"/>',
-    music:   '<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
-    folder:  '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
-    bolt:    '<path d="M13 2L4 14h6l-1 8 9-12h-6z"/>',
-    star:    '<path d="M12 2l2.4 5 5.6.8-4 4 1 5.6L12 20l-5 2.4 1-5.6-4-4 5.6-.8z"/>',
-    puzzle:  '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/>',
-    home:    '<circle cx="12" cy="11" r="3"/><path d="M12 14v6"/><path d="M5 20h14"/>',
-    gamepad: '<rect x="3" y="8" width="18" height="9" rx="4"/><path d="M7 12v2M6 13h2"/><circle cx="16" cy="12.4" r="1"/><circle cx="18.5" cy="14" r="1"/>',
-    chat:    '<path d="M4 5h16v10H9l-4 4V5z"/>'
-  };
-  var COLORS = { blue: 'g-blue', orange: 'g-orange', green: 'g-green', purple: 'g-purple' };
-  var CHEV = '<div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>';
+    // SVG 图标库：新增内容时按 icon 名称引用
+    var ICONS = {
+      horn: '<path d="M3 10v4a1 1 0 0 0 1 1h3l8 5V4L7 9H4a1 1 0 0 0-1 1z"/><path d="M18 8a4 4 0 0 1 0 8"/>',
+      bell: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8v.5"/>',
+      gift: '<path d="M5 21V4h11l-2 4 2 4H5"/>',
+      film: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9l5 3-5 3z" fill="#fff" stroke="none"/>',
+      music: '<path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/>',
+      folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+      bolt: '<path d="M13 2L4 14h6l-1 8 9-12h-6z"/>',
+      star: '<path d="M12 2l2.4 5 5.6.8-4 4 1 5.6L12 20l-5 2.4 1-5.6-4-4 5.6-.8z"/>',
+      puzzle: '<rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="9" r="1.2"/><circle cx="15" cy="15" r="1.2"/><circle cx="15" cy="9" r="1.2"/><circle cx="9" cy="15" r="1.2"/>',
+      home: '<circle cx="12" cy="11" r="3"/><path d="M12 14v6"/><path d="M5 20h14"/>',
+      gamepad: '<rect x="3" y="8" width="18" height="9" rx="4"/><path d="M7 12v2M6 13h2"/><circle cx="16" cy="12.4" r="1"/><circle cx="18.5" cy="14" r="1"/>',
+      chat: '<path d="M4 5h16v10H9l-4 4V5z"/>'
+    };
+    var COLORS = { blue: 'g-blue', orange: 'g-orange', green: 'g-green', purple: 'g-purple' };
+    var CHEV = '<div class="chev"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>';
 
-  // 转义，防止内容里的引号/尖括号破坏 HTML
-  function esc(s) {
-    return String(s == null ? '' : s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  }
-
-  // 渲染单条「列表型」内容（公告 / 讨论）
-  function listRow(it) {
-    var color = COLORS[it.color] || 'g-blue';
-    var ic = '<div class="ic ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
-    var body = '<div class="body"><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.desc) + '</div></div>';
-    var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || ''));
-    if (it.link) {
-      return '<a class="row" data-cat="' + it.cat + '" data-text="' + dt + '" href="' + esc(it.link) + '">' + ic + body + CHEV + '</a>';
+    // 转义，防止内容里的引号/尖括号破坏 HTML
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
-    return '<div class="row" data-cat="' + it.cat + '" data-text="' + dt + '">' + ic + body + CHEV + '</div>';
-  }
 
-  // 渲染单条「应用卡」内容（软件 / 游戏）
-  function appRow(it) {
-    var color = COLORS[it.color] || 'g-blue';
-    var ai = '<div class="ai ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
-    var body = '<div class="body"><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.desc) + '</div></div>';
-    var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || ''));
-    var href = it.link || '#';
-    return '<div class="row appcard" data-cat="' + it.cat + '" data-text="' + dt + '">' + ai + body + '<a class="get" href="' + esc(href) + '">下载</a></div>';
-  }
-
-  // 根据数据渲染全部内容
-  function render(data) {
-    var html = '';
-    for (var c = 0; c < data.cats.length; c++) {
-      var cat = data.cats[c];
-      var items = [];
-      for (var i = 0; i < data.items.length; i++) {
-        if (data.items[i].cat === cat.id) { items.push(data.items[i]); }
+    // 渲染单条「列表型」内容（公告 / 讨论）
+    function listRow(it) {
+      var color = COLORS[it.color] || 'g-blue';
+      var ic = '<div class="ic ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
+      var body = '<div class="body"><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.desc) + '</div></div>';
+      var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || ''));
+      if (it.link) {
+        return '<a class="row" data-cat="' + it.cat + '" data-text="' + dt + '" href="' + esc(it.link) + '">' + ic + body + CHEV + '</a>';
       }
-      if (!items.length) { continue; }
-      html += '<div class="section" data-cat="' + cat.id + '">';
-      html += '<div class="sec-title">' + esc(cat.title) + '</div>';
-      if (cat.type === 'app') {
-        for (var j = 0; j < items.length; j++) { html += appRow(items[j]); }
-      } else {
-        html += '<div class="group">';
-        for (var k = 0; k < items.length; k++) { html += listRow(items[k]); }
+      return '<div class="row" data-cat="' + it.cat + '" data-text="' + dt + '">' + ic + body + CHEV + '</div>';
+    }
+
+    // 渲染单条「应用卡」内容（软件 / 游戏）
+    function appRow(it) {
+      var color = COLORS[it.color] || 'g-blue';
+      var ai = '<div class="ai ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
+      var body = '<div class="body"><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.desc) + '</div></div>';
+      var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || ''));
+      var href = it.link || '#';
+      return '<div class="row appcard" data-cat="' + it.cat + '" data-text="' + dt + '">' + ai + body + '<a class="get" href="' + esc(href) + '">下载</a></div>';
+    }
+
+    // 根据数据渲染全部内容
+    function render(data) {
+      var html = '';
+      for (var c = 0; c < data.cats.length; c++) {
+        var cat = data.cats[c];
+        var items = [];
+        for (var i = 0; i < data.items.length; i++) {
+          if (data.items[i].cat === cat.id) { items.push(data.items[i]); }
+        }
+        if (!items.length) { continue; }
+        html += '<div class="section" data-cat="' + cat.id + '">';
+        html += '<div class="sec-title">' + esc(cat.title) + '</div>';
+        if (cat.type === 'app') {
+          for (var j = 0; j < items.length; j++) { html += appRow(items[j]); }
+        } else {
+          html += '<div class="group">';
+          for (var k = 0; k < items.length; k++) { html += listRow(items[k]); }
+          html += '</div>';
+        }
         html += '</div>';
       }
-      html += '</div>';
+      document.getElementById('list').innerHTML = html;
     }
-    document.getElementById('list').innerHTML = html;
-  }
 
-  // 切换底部标签栏分类
-  function setCategory(cat, el) {
-    if (cat === currentCat) { return; }
-    currentCat = cat;
-    var tabs = document.getElementById('tabbar').getElementsByClassName('tab');
-    for (var i = 0; i < tabs.length; i++) { tabs[i].className = 'tab'; }
-    if (el) { el.className = 'tab on'; }
-    applyFilter();
-  }
-
-  // 搜索（叠加当前分类）
-  function filterList() { applyFilter(); }
-
-  // 统一过滤逻辑（ES5，兼容 iOS9）
-  function applyFilter() {
-    var q = document.getElementById('q').value.toLowerCase();
-    var rows = document.getElementById('list').getElementsByClassName('row');
-    var shownRows = 0;
-    for (var i = 0; i < rows.length; i++) {
-      var rc = rows[i].getAttribute('data-cat');
-      var txt = (rows[i].getAttribute('data-text') + ' ' + rows[i].innerText).toLowerCase();
-      var ok = (currentCat === 'all' || rc === currentCat) && (q === '' || txt.indexOf(q) !== -1);
-      rows[i].style.display = ok ? '' : 'none';
-      if (ok) { shownRows++; }
+    // 切换底部标签栏分类
+    function setCategory(cat, el) {
+      if (cat === currentCat) { return; }
+      currentCat = cat;
+      var tabs = document.getElementById('tabbar').getElementsByClassName('tab');
+      for (var i = 0; i < tabs.length; i++) { tabs[i].className = 'tab'; }
+      if (el) { el.className = 'tab on'; }
+      applyFilter();
     }
-    // 隐藏没有可见行的小节
-    var secs = document.getElementById('list').getElementsByClassName('section');
-    for (var j = 0; j < secs.length; j++) {
-      var inner = secs[j].getElementsByClassName('row');
-      var innerOk = false;
-      for (var k = 0; k < inner.length; k++) {
-        if (inner[k].style.display !== 'none') { innerOk = true; break; }
+
+    // 搜索（叠加当前分类）
+    function filterList() { applyFilter(); }
+
+    // 统一过滤逻辑（ES5，兼容 iOS9）
+    function applyFilter() {
+      var q = document.getElementById('q').value.toLowerCase();
+      var rows = document.getElementById('list').getElementsByClassName('row');
+      var shownRows = 0;
+      for (var i = 0; i < rows.length; i++) {
+        var rc = rows[i].getAttribute('data-cat');
+        var txt = (rows[i].getAttribute('data-text') + ' ' + rows[i].innerText).toLowerCase();
+        var ok = (currentCat === 'all' || rc === currentCat) && (q === '' || txt.indexOf(q) !== -1);
+        rows[i].style.display = ok ? '' : 'none';
+        if (ok) { shownRows++; }
       }
-      secs[j].style.display = innerOk ? '' : 'none';
+      // 隐藏没有可见行的小节
+      var secs = document.getElementById('list').getElementsByClassName('section');
+      for (var j = 0; j < secs.length; j++) {
+        var inner = secs[j].getElementsByClassName('row');
+        var innerOk = false;
+        for (var k = 0; k < inner.length; k++) {
+          if (inner[k].style.display !== 'none') { innerOk = true; break; }
+        }
+        secs[j].style.display = innerOk ? '' : 'none';
+      }
+      document.getElementById('empty').style.display = (shownRows === 0) ? 'block' : 'none';
     }
-    document.getElementById('empty').style.display = (shownRows === 0) ? 'block' : 'none';
-  }
 
-  // 加载数据并渲染
-  if (typeof SITE_DATA !== 'undefined') {
-    render(SITE_DATA);
-    applyFilter();
-  } else {
-    document.getElementById('list').innerHTML =
-      '<div class="empty" style="display:block">内容未加载：请确认 data.js 与本页面在同一目录。</div>';
-  }
-</script>
+    // 加载数据并渲染
+    if (typeof SITE_DATA !== 'undefined') {
+      render(SITE_DATA);
+      applyFilter();
+    } else {
+      document.getElementById('list').innerHTML =
+        '<div class="empty" style="display:block">内容未加载：请确认 data.js 与本页面在同一目录。</div>';
+    }
+  </script>
 </body>
+
 </html>
