@@ -25,10 +25,7 @@ var SITE_DATA = {
     { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "今天上线啦", "desc": "10-02 · 纯免费的网站，不收群众一针一线", "tags": "维护 公告 停服 升级", "link": "", "content": "欢迎来到 i 玩机乐园！\n\n这是一个完全免费、不夹杂任何广告的网站，专为老款 iOS 设备打造。\n\n· 这里会持续更新好用的 App、游戏资源\n· 也会第一时间发布停服、升级、维护等公告\n· 想一起玩机？点底部「加入讨论」找到我们\n\n有问题随时在交流群反馈，我们会认真看每一条消息。" },
 
 
-    { "cat": "app", "icon": "film",   "color": "blue",   "title": "XX 影视（去广告版）", "desc": "工具 · 4.9 · 免会员畅看", "tags": "影视 追剧 视频 播放器", "link": "https://example.com/app1" },
-    { "cat": "app", "icon": "music",  "color": "purple", "title": "无损音乐盒", "desc": "音乐 · 4.8 · Hi-Res 无损", "tags": "音乐 听歌 无损 播放器", "link": "https://example.com/app2" },
-    { "cat": "app", "icon": "folder", "color": "green",  "title": "全能文件管理器", "desc": "工具 · 4.7 · 解压·传输", "tags": "文件 管理 浏览器 解压 传输", "link": "https://example.com/app3" },
-    { "cat": "app", "icon": "bolt",   "color": "orange", "title": "快捷指令库", "desc": "效率 · 4.9 · 一键自动化", "tags": "快捷指令 效率 自动化", "link": "https://example.com/app4" },
+    { "cat": "app", "icon": "film",   "color": "black",   "title": "抖音", "desc": "old抖音", "tags": "影视 追剧 视频 播放器", "link": "https://www.ilanzou.com/s/pgq9xObl" },
 
     { "cat": "game", "icon": "star",    "color": "orange", "title": "像素勇者传说", "desc": "角色扮演 · 4.8 · 经典重制", "tags": "像素 RPG 角色扮演 冒险", "link": "https://example.com/game1" },
     { "cat": "game", "icon": "puzzle",  "color": "purple", "title": "糖果消消乐", "desc": "休闲益智 · 4.7 · 上百关卡", "tags": "消除 休闲 益智 解谜", "link": "https://example.com/game2" },
