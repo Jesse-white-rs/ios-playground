@@ -1,0 +1,47 @@
+// ============================================================
+//  网站内容数据 —— 维护时只需要编辑这个文件
+// ============================================================
+//  cats  : 分类（顺序即展示顺序），type 决定版式
+//          list = 列表型（公告 / 讨论）     app = 应用卡型（软件 / 游戏）
+//  items : 每条内容，字段说明：
+//          cat    必填，对应上面某个分类 id（ann/app/game/disc）
+//          icon   必填，图标名（见文件底部「可选图标」）
+//          color  必填，图标底色：blue / orange / green / purple
+//          title  必填，主标题
+//          desc   必填，副标题（小字说明）
+//          tags   选填，搜索关键词，用空格分隔
+//          link   选填，点击跳转的链接；留空则不可点
+//  新增一条内容：复制一行 item，改字段即可。
+// ============================================================
+var SITE_DATA = {
+  "cats": [
+    { "id": "ann",  "title": "最新公告", "type": "list" },
+    { "id": "app",  "title": "热门 App", "type": "app" },
+    { "id": "game", "title": "热门游戏", "type": "app" },
+    { "id": "disc", "title": "加入讨论", "type": "list" }
+  ],
+  "items": [
+    { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "站点维护通知", "desc": "10-01 · 今晚 23:00 短暂维护", "tags": "维护 公告 停服 升级", "link": "" },
+    { "cat": "ann", "icon": "bell",   "color": "orange", "title": "资源库更新上线", "desc": "09-28 · 新增 30+ 精选 App", "tags": "更新 版本 新增 软件", "link": "" },
+    { "cat": "ann", "icon": "gift",   "color": "green",  "title": "中秋玩机福利", "desc": "09-25 · 参与抽奖赢周边", "tags": "活动 福利 抽奖 礼包", "link": "" },
+
+    { "cat": "app", "icon": "film",   "color": "blue",   "title": "XX 影视（去广告版）", "desc": "工具 · 4.9 · 免会员畅看", "tags": "影视 追剧 视频 播放器", "link": "https://example.com/app1" },
+    { "cat": "app", "icon": "music",  "color": "purple", "title": "无损音乐盒", "desc": "音乐 · 4.8 · Hi-Res 无损", "tags": "音乐 听歌 无损 播放器", "link": "https://example.com/app2" },
+    { "cat": "app", "icon": "folder", "color": "green",  "title": "全能文件管理器", "desc": "工具 · 4.7 · 解压·传输", "tags": "文件 管理 浏览器 解压 传输", "link": "https://example.com/app3" },
+    { "cat": "app", "icon": "bolt",   "color": "orange", "title": "快捷指令库", "desc": "效率 · 4.9 · 一键自动化", "tags": "快捷指令 效率 自动化", "link": "https://example.com/app4" },
+
+    { "cat": "game", "icon": "star",    "color": "orange", "title": "像素勇者传说", "desc": "角色扮演 · 4.8 · 经典重制", "tags": "像素 RPG 角色扮演 冒险", "link": "https://example.com/game1" },
+    { "cat": "game", "icon": "puzzle",  "color": "purple", "title": "糖果消消乐", "desc": "休闲益智 · 4.7 · 上百关卡", "tags": "消除 休闲 益智 解谜", "link": "https://example.com/game2" },
+    { "cat": "game", "icon": "home",    "color": "green",  "title": "我的小庄园", "desc": "模拟经营 · 4.9 · 治愈放置", "tags": "模拟 经营 养成 建造", "link": "https://example.com/game3" },
+    { "cat": "game", "icon": "gamepad", "color": "blue",   "title": "街机怀旧合集", "desc": "动作街机 · 4.6 · 百款经典", "tags": "街机 动作 怀旧 复古", "link": "https://example.com/game4" },
+
+    { "cat": "disc", "icon": "chat", "color": "blue",   "title": "QQ 交流群", "desc": "实时答疑 · 资源分享", "tags": "QQ 群 交流 答疑", "link": "https://example.com/qq" },
+    { "cat": "disc", "icon": "chat", "color": "purple", "title": "Telegram 频道", "desc": "每日更新 · 防走丢", "tags": "Telegram 频道 更新", "link": "https://example.com/tg" },
+    { "cat": "disc", "icon": "chat", "color": "green",  "title": "玩机论坛", "desc": "教程投稿 · 经验交流", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" }
+  ]
+};
+
+// ---- 可选图标（icon 字段可填以下名称）----
+// horn 喇叭 / bell 铃铛 / gift 礼包 / film 影视 / music 音乐
+// folder 文件夹 / bolt 闪电 / star 星星 / puzzle 拼图 / home 小屋
+// gamepad 手柄 / chat 对话气泡
