@@ -657,21 +657,30 @@
     function applyFilter() {
       var q = document.getElementById('q').value.toLowerCase();
       var rows = document.getElementById('list').getElementsByClassName('row');
+      var cards = document.getElementById('list').getElementsByClassName('card');
       var shownRows = 0;
-      for (var i = 0; i < rows.length; i++) {
-        var rc = rows[i].getAttribute('data-cat');
-        var txt = (rows[i].getAttribute('data-text') + ' ' + rows[i].innerText).toLowerCase();
+      function check(el) {
+        var rc = el.getAttribute('data-cat');
+        var txt = (el.getAttribute('data-text') + ' ' + el.innerText).toLowerCase();
         var ok = (currentCat === 'all' || rc === currentCat) && (q === '' || txt.indexOf(q) !== -1);
-        rows[i].style.display = ok ? '' : 'none';
+        el.style.display = ok ? '' : 'none';
         if (ok) { shownRows++; }
       }
-      // 隐藏没有可见行的小节
+      for (var i = 0; i < rows.length; i++) { check(rows[i]); }
+      for (var ci = 0; ci < cards.length; ci++) { check(cards[ci]); }
+      // 隐藏没有可见项的小节（行或卡片都算）
       var secs = document.getElementById('list').getElementsByClassName('section');
       for (var j = 0; j < secs.length; j++) {
-        var inner = secs[j].getElementsByClassName('row');
+        var innerR = secs[j].getElementsByClassName('row');
+        var innerC = secs[j].getElementsByClassName('card');
         var innerOk = false;
-        for (var k = 0; k < inner.length; k++) {
-          if (inner[k].style.display !== 'none') { innerOk = true; break; }
+        for (var k = 0; k < innerR.length; k++) {
+          if (innerR[k].style.display !== 'none') { innerOk = true; break; }
+        }
+        if (!innerOk) {
+          for (var m = 0; m < innerC.length; m++) {
+            if (innerC[m].style.display !== 'none') { innerOk = true; break; }
+          }
         }
         secs[j].style.display = innerOk ? '' : 'none';
       }
