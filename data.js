@@ -27,6 +27,8 @@ var SITE_DATA = {
 
     { "cat": "app", "icon": "film",   "color": "black",   "title": "抖音", "desc": "old抖音", "tags": "影视 追剧 视频 播放器", "link": "https://www.ilanzou.com/s/pgq9xObl" },
     { "cat": "app", "icon": "film",   "color": "green",   "title": "酷安", "desc": "old酷安", "tags": "社区", "link": "https://www.ilanzou.com/s/n389xouT" },
+    { "cat": "app", "icon": "film",   "color": "orange",   "title": "微博", "desc": "old微博", "tags": "社区", "link": "https://jessese.lanzouv.com/iDUAc4aoeguj" },
+    { "cat": "app", "icon": "film",   "color": "blue",   "title": "bilibili", "desc": "oldbilibili", "tags": "社区", "link": "https://www.ilanzou.com/s/n389xouT" },
 
     { "cat": "game", "icon": "star",    "color": "orange", "title": "像素勇者传说", "desc": "角色扮演 · 4.8 · 经典重制", "tags": "像素 RPG 角色扮演 冒险", "link": "https://example.com/game1" },
     { "cat": "game", "icon": "puzzle",  "color": "purple", "title": "糖果消消乐", "desc": "休闲益智 · 4.7 · 上百关卡", "tags": "消除 休闲 益智 解谜", "link": "https://example.com/game2" },
