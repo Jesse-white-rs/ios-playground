@@ -6,11 +6,12 @@
 //  items : 每条内容，字段说明：
 //          cat    必填，对应上面某个分类 id（ann/app/game/disc）
 //          icon   必填，图标名（见文件底部「可选图标」）
-//          color  必填，图标底色：blue / orange / green / purple
+//          color  必填，图标底色：blue / orange / green / purple / red / pink
 //          title  必填，主标题
 //          desc   必填，副标题（小字说明）
 //          tags   选填，搜索关键词，用空格分隔
 //          link   选填，点击跳转的链接；留空则不可点
+//          content选填，公告/讨论的「全文」，填了即可点开查看详情（支持换行）
 //  新增一条内容：复制一行 item，改字段即可。
 // ============================================================
 var SITE_DATA = {
@@ -21,7 +22,7 @@ var SITE_DATA = {
     { "id": "disc", "title": "加入讨论", "type": "list" }
   ],
   "items": [
-    { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "今天上线啦", "desc": "10-02 · 纯免费的网站，不收群众一针一线", "tags": "维护 公告 停服 升级", "link": "" },
+    { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "今天上线啦", "desc": "10-02 · 纯免费的网站，不收群众一针一线", "tags": "维护 公告 停服 升级", "link": "", "content": "欢迎来到 i 玩机乐园！\n\n这是一个完全免费、不夹杂任何广告的网站，专为老款 iOS 设备打造。\n\n· 这里会持续更新好用的 App、游戏资源\n· 也会第一时间发布停服、升级、维护等公告\n· 想一起玩机？点底部「加入讨论」找到我们\n\n有问题随时在交流群反馈，我们会认真看每一条消息。" },
 
 
     { "cat": "app", "icon": "film",   "color": "blue",   "title": "XX 影视（去广告版）", "desc": "工具 · 4.9 · 免会员畅看", "tags": "影视 追剧 视频 播放器", "link": "https://example.com/app1" },
