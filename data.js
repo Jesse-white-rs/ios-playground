@@ -35,9 +35,8 @@ var SITE_DATA = {
     { "cat": "game", "icon": "home",    "color": "green",  "title": "我的小庄园", "desc": "模拟经营 · 4.9 · 治愈放置", "tags": "模拟 经营 养成 建造", "link": "https://example.com/game3" },
     { "cat": "game", "icon": "gamepad", "color": "blue",   "title": "街机怀旧合集", "desc": "动作街机 · 4.6 · 百款经典", "tags": "街机 动作 怀旧 复古", "link": "https://example.com/game4" },
 
-    { "cat": "disc", "icon": "chat", "color": "blue",   "title": "QQ 交流群", "desc": "实时答疑 · 资源分享", "tags": "QQ 群 交流 答疑", "link": "https://example.com/qq" },
-    { "cat": "disc", "icon": "chat", "color": "purple", "title": "Telegram 频道", "desc": "每日更新 · 防走丢", "tags": "Telegram 频道 更新", "link": "https://example.com/tg" },
-    { "cat": "disc", "icon": "chat", "color": "green",  "title": "玩机论坛", "desc": "教程投稿 · 经验交流", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" }
+    { "cat": "disc", "icon": "chat", "color": "blue",   "title": "QQ 交流群", "desc": "实时答疑 · 资源分享", "tags": "点击链接加入群聊【ios 玩机乐园交流群】", "link": "https://qun.qq.com/universal-share/share?ac=1&authKey=KAV%2BSQmBBYyWUP44hhawaONVlZlHpD5PQWHYMdbrCcKol6BqV5oqt%2B%2BRSZ8YIhCZ&busi_data=eyJncm91cENvZGUiOiI1NDgxMjM2MzUiLCJ0b2tlbiI6IjBucjd4YmwydEplcU4zVnpYdW42VC9TMFdSVGMvU055SzU3MDhZY2FrUG9iV1doMXEzRjBPYmw2S1NpaVB6OTQiLCJ1aW4iOiIxOTQwNDQ5NzE1In0%3D&data=FScCvtafgcbaBs8wHaBkdZ4QAyX4nei7gzkdPCJ1ntYRuBSqBgMuKNLBwShwYhvhhNvvLV3NjFcHM9u8w7mgQA&svctype=4&tempid=h5_group_info" },
+    { "cat": "disc", "icon": "chat", "color": "green",  "title": "站长酷安", "desc": "搜索：酷游好人", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" }
   ]
 };
 
