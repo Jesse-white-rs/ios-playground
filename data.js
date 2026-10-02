@@ -21,9 +21,8 @@ var SITE_DATA = {
     { "id": "disc", "title": "加入讨论", "type": "list" }
   ],
   "items": [
-    { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "站点维护通知", "desc": "10-01 · 今晚 23:00 短暂维护", "tags": "维护 公告 停服 升级", "link": "" },
-    { "cat": "ann", "icon": "bell",   "color": "orange", "title": "资源库更新上线", "desc": "09-28 · 新增 30+ 精选 App", "tags": "更新 版本 新增 软件", "link": "" },
-    { "cat": "ann", "icon": "gift",   "color": "green",  "title": "中秋玩机福利", "desc": "09-25 · 参与抽奖赢周边", "tags": "活动 福利 抽奖 礼包", "link": "" },
+    { "cat": "ann", "icon": "horn",   "color": "blue",   "title": "今天上线啦", "desc": "10-02 · 纯免费的网站，不收群众一针一线", "tags": "维护 公告 停服 升级", "link": "" },
+
 
     { "cat": "app", "icon": "film",   "color": "blue",   "title": "XX 影视（去广告版）", "desc": "工具 · 4.9 · 免会员畅看", "tags": "影视 追剧 视频 播放器", "link": "https://example.com/app1" },
     { "cat": "app", "icon": "music",  "color": "purple", "title": "无损音乐盒", "desc": "音乐 · 4.8 · Hi-Res 无损", "tags": "音乐 听歌 无损 播放器", "link": "https://example.com/app2" },
@@ -36,7 +35,10 @@ var SITE_DATA = {
     { "cat": "game", "icon": "gamepad", "color": "blue",   "title": "街机怀旧合集", "desc": "动作街机 · 4.6 · 百款经典", "tags": "街机 动作 怀旧 复古", "link": "https://example.com/game4" },
 
     { "cat": "disc", "icon": "chat", "color": "blue",   "title": "QQ 交流群", "desc": "实时答疑 · 资源分享", "tags": "点击链接加入群聊【ios 玩机乐园交流群】", "link": "https://qun.qq.com/universal-share/share?ac=1&authKey=KAV%2BSQmBBYyWUP44hhawaONVlZlHpD5PQWHYMdbrCcKol6BqV5oqt%2B%2BRSZ8YIhCZ&busi_data=eyJncm91cENvZGUiOiI1NDgxMjM2MzUiLCJ0b2tlbiI6IjBucjd4YmwydEplcU4zVnpYdW42VC9TMFdSVGMvU055SzU3MDhZY2FrUG9iV1doMXEzRjBPYmw2S1NpaVB6OTQiLCJ1aW4iOiIxOTQwNDQ5NzE1In0%3D&data=FScCvtafgcbaBs8wHaBkdZ4QAyX4nei7gzkdPCJ1ntYRuBSqBgMuKNLBwShwYhvhhNvvLV3NjFcHM9u8w7mgQA&svctype=4&tempid=h5_group_info" },
-    { "cat": "disc", "icon": "chat", "color": "green",  "title": "站长酷安", "desc": "搜索：酷游好人", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" }
+    { "cat": "disc", "icon": "chat", "color": "orange", "title": "QQ", "desc": "1940449715", "tags": "点击链接加入群聊【ios 玩机乐园交流群】", "link": "https://t.me/joinchat/T_80049715" },
+    { "cat": "disc", "icon": "chat", "color": "green",  "title": "酷安", "desc": "搜索：酷游好人", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" },
+    { "cat": "disc", "icon": "chat", "color": "red",  "title": "小红书", "desc": "搜索：jesse.se", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" },
+    { "cat": "disc", "icon": "chat", "color": "pink",  "title": "bilibili", "desc": "搜索：烤肠要加沙拉酱", "tags": "论坛 帖子 投稿 经验", "link": "https://example.com/forum" },
   ]
 };
 
