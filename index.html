@@ -260,49 +260,36 @@
       background: linear-gradient(135deg, #ff2d92, #ff7eb3);
     }
 
-    /* ===== 详情弹窗 ===== */
-    .row.clickable { cursor: pointer; }
-    .row.clickable:active { background: #e9e9ee; }
-
-    .mask {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,.45);
-      display: none;
-      -webkit-align-items: center; align-items: center;
-      -webkit-justify-content: center; justify-content: center;
-      padding: 24px;
-      z-index: 100;
-    }
-    .mask.show { display: -webkit-flex; display: flex; }
-    .sheet {
-      width: 100%; max-width: 460px;
+    /* ===== 大卡片（公告全文直接铺开） ===== */
+    .card {
       background: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      -webkit-animation: pop .2s ease;
-      animation: pop .2s ease;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 .5px 0 rgba(0, 0, 0, .04);
     }
-    @-webkit-keyframes pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    @keyframes pop { from { transform: scale(.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .sheet-hd {
-      display: -webkit-flex; display: flex;
-      -webkit-align-items: center; align-items: center;
-      padding: 16px 18px;
-      border-bottom: 1px solid #eee;
+    .card-hd {
+      display: -webkit-box; display: flex;
+      -webkit-box-align: center; align-items: center;
+      margin-bottom: 8px;
     }
-    .sheet-hd .ic { width: 34px; height: 34px; border-radius: 9px; margin-right: 11px; flex: 0 0 auto; }
-    .sheet-hd .ic svg { width: 20px; height: 20px; }
-    .sheet-hd .st { font-size: 16px; font-weight: 600; color: #1c1c1e; -webkit-flex: 1; flex: 1; }
-    .sheet-close {
-      width: 28px; height: 28px; border: none; background: #f0f0f3; border-radius: 50%;
-      color: #8a8a8e; font-size: 18px; line-height: 28px; cursor: pointer;
+    .card-hd .ic {
+      width: 38px; height: 38px; border-radius: 10px;
+      -webkit-box-flex: 0; flex: 0 0 auto;
+      display: -webkit-box; display: flex;
+      -webkit-box-pack: center; justify-content: center;
+      -webkit-box-align: center; align-items: center;
+      margin-right: 11px;
     }
-    .sheet-bd { padding: 16px 18px 20px; max-height: 60vh; overflow-y: auto; }
-    .sheet-desc { font-size: 13px; color: #8a8a8e; margin-bottom: 12px; }
-    .sheet-body { font-size: 15px; line-height: 1.7; color: #2c2c2e; white-space: pre-wrap; word-wrap: break-word; }
-    .sheet-link {
-      display: block; text-align: center; margin-top: 18px;
+    .card-hd .ic svg { width: 22px; height: 22px; stroke: #fff; }
+    .card-hd .t { font-size: 17px; font-weight: 600; color: #1c1c1e; }
+    .card-desc { font-size: 13px; color: #8e8e93; margin-bottom: 10px; }
+    .card-body {
+      font-size: 15px; line-height: 1.7; color: #2c2c2e;
+      white-space: pre-wrap; word-wrap: break-word;
+    }
+    .card-link {
+      display: block; text-align: center; margin-top: 14px;
       padding: 11px; border-radius: 12px;
       background: #007aff; color: #fff; font-size: 15px; text-decoration: none; font-weight: 600;
     }
@@ -554,22 +541,6 @@
     </div>
   </div>
 
-  <!-- 详情弹窗（点击带 content 的公告/讨论项弹出） -->
-  <div class="mask" id="mask" onclick="if(event.target===this)closeDetail()">
-    <div class="sheet">
-      <div class="sheet-hd">
-        <div class="ic" id="d-ic"></div>
-        <div class="st" id="d-title"></div>
-        <button class="sheet-close" onclick="closeDetail()">&times;</button>
-      </div>
-      <div class="sheet-bd">
-        <div class="sheet-desc" id="d-desc"></div>
-        <div class="sheet-body" id="d-body"></div>
-        <a class="sheet-link" id="d-link" style="display:none" target="_blank"></a>
-      </div>
-    </div>
-  </div>
-
   <!-- 内容数据（编辑这里即可维护网站） -->
   <script src="data.js"></script>
   <script>
@@ -601,24 +572,30 @@
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    // 详情内容暂存（点击弹窗时按索引取用）
-    var DETAIL_STORE = [];
-
-    // 渲染单条「列表型」内容（公告 / 讨论）
+    // 渲染单条「列表型」内容（无全文的行：公告 / 讨论）
     function listRow(it) {
       var color = COLORS[it.color] || 'g-blue';
       var ic = '<div class="ic ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
       var body = '<div class="body"><div class="t">' + esc(it.title) + '</div><div class="d">' + esc(it.desc) + '</div></div>';
-      var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || '') + ' ' + (it.content || ''));
-      if (it.content) {
-        var idx = DETAIL_STORE.length;
-        DETAIL_STORE.push(it);
-        return '<a class="row clickable" data-cat="' + it.cat + '" data-text="' + dt + '" href="#" onclick="openDetail(' + idx + ');return false;">' + ic + body + CHEV + '</a>';
-      }
+      var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || ''));
       if (it.link) {
         return '<a class="row" data-cat="' + it.cat + '" data-text="' + dt + '" href="' + esc(it.link) + '">' + ic + body + CHEV + '</a>';
       }
       return '<div class="row" data-cat="' + it.cat + '" data-text="' + dt + '">' + ic + body + CHEV + '</div>';
+    }
+
+    // 渲染「大卡片」内容（带 content 全文的公告等，直接铺开所有信息，无需点开）
+    function bigCard(it) {
+      var color = COLORS[it.color] || 'g-blue';
+      var ic = '<div class="ic ' + color + '"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg></div>';
+      var dt = esc((it.tags || '') + ' ' + (it.title || '') + ' ' + (it.desc || '') + ' ' + (it.content || ''));
+      var linkHtml = it.link ? '<a class="card-link" href="' + esc(it.link) + '" target="_blank">前往查看</a>' : '';
+      return '<div class="card" data-cat="' + it.cat + '" data-text="' + dt + '">' +
+        '<div class="card-hd">' + ic + '<div class="t">' + esc(it.title) + '</div></div>' +
+        '<div class="card-desc">' + esc(it.desc) + '</div>' +
+        '<div class="card-body">' + esc(it.content || '') + '</div>' +
+        linkHtml +
+        '</div>';
     }
 
     // 渲染单条「应用卡」内容（软件 / 游戏）
@@ -630,40 +607,6 @@
       var href = it.link || '#';
       return '<div class="row appcard" data-cat="' + it.cat + '" data-text="' + dt + '">' + ai + body + '<a class="get" href="' + esc(href) + '">下载</a></div>';
     }
-
-    // 打开详情弹窗
-    function openDetail(idx) {
-      var it = DETAIL_STORE[idx];
-      if (!it) { return; }
-      var color = COLORS[it.color] || 'g-blue';
-      document.getElementById('d-ic').className = 'ic ' + color;
-      document.getElementById('d-ic').innerHTML =
-        '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[it.icon] || '') + '</svg>';
-      document.getElementById('d-title').textContent = it.title || '';
-      document.getElementById('d-desc').textContent = it.desc || '';
-      document.getElementById('d-body').textContent = it.content || '';
-      var lk = document.getElementById('d-link');
-      if (it.link) {
-        lk.style.display = 'block';
-        lk.href = it.link;
-        lk.textContent = '前往查看';
-      } else {
-        lk.style.display = 'none';
-      }
-      var m = document.getElementById('mask');
-      m.style.display = '-webkit-flex';
-      m.style.display = 'flex';
-    }
-
-    // 关闭详情弹窗
-    function closeDetail() {
-      document.getElementById('mask').style.display = 'none';
-    }
-
-    // Esc 关闭弹窗
-    document.addEventListener('keydown', function (e) {
-      if (e.keyCode === 27) { closeDetail(); }
-    });
 
     // 根据数据渲染全部内容
     function render(data) {
@@ -685,9 +628,12 @@
         if (cat.type === 'app') {
           for (var j = 0; j < items.length; j++) { html += appRow(items[j]); }
         } else {
-          html += '<div class="group">';
-          for (var k = 0; k < items.length; k++) { html += listRow(items[k]); }
-          html += '</div>';
+          var rows = '';
+          for (var k = 0; k < items.length; k++) {
+            if (items[k].content) { html += bigCard(items[k]); }
+            else { rows += listRow(items[k]); }
+          }
+          if (rows) { html += '<div class="group">' + rows + '</div>'; }
         }
         html += '</div>';
       }
