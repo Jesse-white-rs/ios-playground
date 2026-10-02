@@ -17,8 +17,8 @@
 var SITE_DATA = {
   "cats": [
     { "id": "ann",  "title": "最新公告", "type": "list" },
-    { "id": "app",  "title": "热门 App", "type": "app" },
-    { "id": "game", "title": "热门游戏", "type": "app" },
+    { "id": "app",  "title": "热门 App", "type": "app", "unit": "软件" },
+    { "id": "game", "title": "热门游戏", "type": "app", "unit": "游戏" },
     { "id": "disc", "title": "加入讨论", "type": "list" }
   ],
   "items": [

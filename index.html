@@ -335,6 +335,8 @@
       align-items: center;
       padding: 11px 14px;
       position: relative;
+      color: inherit;
+      text-decoration: none;
     }
 
     .row+.row::before {
@@ -611,7 +613,7 @@
       if (it.content) {
         var idx = DETAIL_STORE.length;
         DETAIL_STORE.push(it);
-        return '<div class="row clickable" data-cat="' + it.cat + '" data-text="' + dt + '" onclick="openDetail(' + idx + ')">' + ic + body + CHEV + '</div>';
+        return '<a class="row clickable" data-cat="' + it.cat + '" data-text="' + dt + '" href="#" onclick="openDetail(' + idx + ');return false;">' + ic + body + CHEV + '</a>';
       }
       if (it.link) {
         return '<a class="row" data-cat="' + it.cat + '" data-text="' + dt + '" href="' + esc(it.link) + '">' + ic + body + CHEV + '</a>';
@@ -648,12 +650,14 @@
       } else {
         lk.style.display = 'none';
       }
-      document.getElementById('mask').className = 'mask show';
+      var m = document.getElementById('mask');
+      m.style.display = '-webkit-flex';
+      m.style.display = 'flex';
     }
 
     // 关闭详情弹窗
     function closeDetail() {
-      document.getElementById('mask').className = 'mask';
+      document.getElementById('mask').style.display = 'none';
     }
 
     // Esc 关闭弹窗
@@ -672,7 +676,12 @@
         }
         if (!items.length) { continue; }
         html += '<div class="section" data-cat="' + cat.id + '">';
-        html += '<div class="sec-title">' + esc(cat.title) + '</div>';
+        if (cat.type === 'app') {
+          var unit = cat.unit || '内容';
+          html += '<div class="sec-title">' + esc('该合集下有 ' + items.length + ' 个' + unit) + '</div>';
+        } else {
+          html += '<div class="sec-title">' + esc(cat.title) + '</div>';
+        }
         if (cat.type === 'app') {
           for (var j = 0; j < items.length; j++) { html += appRow(items[j]); }
         } else {
